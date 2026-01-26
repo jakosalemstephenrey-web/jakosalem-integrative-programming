@@ -1,19 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stephen Rey</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCO Landing Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1 class="head">Lorem Ipsum</h1>
-    <p class="lorem">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque obcaecati quae sunt facilis velit nesciunt mollitia doloribus facere fugit, blanditiis consequuntur itaque cupiditate quam? Labore est consequuntur laudantium laborum error.
-    </p>
-</body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">VOCO</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html" class="cta-nav">Login</a></li>
+        </ul>
+    </nav>
 
-<div class="buttoncontainer"><button type="button" class="delete">DELETE</button></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="fade-in">Welcome to VOCO</h1>
+            <p class="fade-in delay">A modern landing page with smooth animations and clean design.</p>
+            <a href="signup.html" class="cta-button fade-in delay-2">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content" id="about">
+        <h2 class="section-title fade-in">About VOCO</h2>
+        <div class="info-container">
+            <div class="info-box slide-up">
+                <h3>Clean Design</h3>
+                <p>Minimalistic, modern design focused on user experience and readability.</p>
+            </div>
+            <div class="info-box slide-up delay">
+                <h3>CSS Animations</h3>
+                <p>Smooth fade-in and slide-up animations without JavaScript.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="content" id="features">
+        <h2 class="section-title fade-in">Features</h2>
+        <div class="info-container">
+            <div class="info-box slide-up">
+                <h3>Responsive Design</h3>
+                <p>Looks perfect on desktops, tablets, and smartphones.</p>
+            </div>
+            <div class="info-box slide-up delay">
+                <h3>Easy to Customize</h3>
+                <p>All sections, colors, and content can be easily edited to match your brand.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="content" id="contact">
+        <h2 class="section-title fade-in">Contact Us</h2>
+        <div class="info-box slide-up">
+            <p>Email: <a href="mailto:contact@voco.com">contact@voco.com</a></p>
+            <p>Phone: +1 234 567 890</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 | VOCO Landing Page Project</p>
+    </footer>
+</body>
 
 </html>

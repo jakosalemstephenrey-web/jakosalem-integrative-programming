@@ -1,19 +1,319 @@
-.head {
-    text-align: center;
+/* -------------------- Reset & Base -------------------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
-.lorem {
-    color: black;
-    text-align: center;
+body {
+    line-height: 1.6;
+    background: #f2f6fc;
+    color: #222;
 }
 
-.delete {
-    background-color: beige;
-    color: black;
-    font-weight: 800;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 5px;
-    border-color: black;
-    display: block;
+
+/* -------------------- Navbar -------------------- */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+}
+
+.navbar .logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #ff4b2b;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.cta-nav {
+    background: #ff4b2b;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 75, 43, 0.3);
+}
+
+
+/* -------------------- Hero -------------------- */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    background: #fff;
+    color: #ff4b2b;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 75, 43, 0.25);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(255, 75, 43, 0.35);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* -------------------- Sections -------------------- */
+
+.content {
+    padding: 6rem 2rem;
+    max-width: 1100px;
     margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #ff4b2b;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #ff4b2b;
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+.info-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.info-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+/* -------------------- Footer -------------------- */
+
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #ff4b2b;
+    color: #fff;
+    font-weight: 500;
+}
+
+
+/* -------------------- Animations -------------------- */
+
+.fade-in {
+    animation: fadeIn 1s forwards;
+    opacity: 0;
+}
+
+.slide-up {
+    animation: slideUp 0.8s forwards;
+    opacity: 0;
+}
+
+.delay {
+    animation-delay: 0.4s;
+}
+
+.delay-2 {
+    animation-delay: 0.7s;
+}
+
+.delay-3 {
+    animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* -------------------- Overlays -------------------- */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.overlay:target {
+    display: flex;
+}
+
+.modal {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    animation: slideUp 0.5s forwards;
+}
+
+.modal .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #ff4b2b;
+}
+
+.input-group {
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #ff4b2b;
+    outline: none;
+}
+
+
+/* Modal Buttons */
+
+.modal button {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 50px;
+    border: none;
+    background: #ff4b2b;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal button:hover {
+    background: #ff2a00;
+    transform: translateY(-2px);
+}
+
+
+/* -------------------- Responsive -------------------- */
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
+    .info-container {
+        grid-template-columns: 1fr;
+    }
 }

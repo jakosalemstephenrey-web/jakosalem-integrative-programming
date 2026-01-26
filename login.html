@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCO Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="content" style="max-width: 400px; margin: 5rem auto;">
+        <h2 class="section-title">Login</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="cta-button">Login</button>
+        </form>
+        <p style="text-align:center; margin-top:1rem;">Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </section>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const storedUser = JSON.parse(localStorage.getItem('vocoUser'));
+            if (storedUser && storedUser.email === email && storedUser.password === password) {
+                alert(`Welcome back, ${storedUser.name}!`);
+                window.location.href = 'index.html';
+            } else {
+                alert('Invalid email or password.');
+            }
+        });
+    </script>
+</body>
+
+</html>
