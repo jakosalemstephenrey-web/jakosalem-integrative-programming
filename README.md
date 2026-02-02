@@ -2,7 +2,7 @@
 # VOCO Landing Page
 
 ## ACTIVITY 1 January 26,2026
-# VOCO Landing Page
+
 A landing page is a single, focused web page designed to get visitors to take one specific action. That action could be signing up, buying a product, downloading a file, or registering for something.
 
 🔹 Technologies Used:
@@ -48,6 +48,7 @@ Clean and user-friendly UI design
 🔹 AI Assistance Disclosure 
  Did you use AI tools?
 Yes, I used ChatGPT to help with layout ideas, text content, and improving the overall structure of the landing page.
+
 
 
 
