@@ -1,0 +1,9 @@
+document.addEventListener("DOMContentLoaded", () => { const loginForm = document.getElementById("loginForm"); const registerForm = document.getElementById("registerForm"); function validateEmail(email) { const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; return
+re.test(email); } function showError(input, message) { const errorSpan = input.nextElementSibling; errorSpan.textContent = message; errorSpan.style.color = "red"; } function clearError(input) { const errorSpan = input.nextElementSibling; errorSpan.textContent
+= ""; } if (loginForm) { loginForm.addEventListener("submit", (e) => { const email = loginForm.querySelector("#email"); const password = loginForm.querySelector("#password"); let valid = true; if (!validateEmail(email.value)) { showError(email, "Invalid
+email format"); valid = false; } else { clearError(email); } if (password.value.length
+< 6) { showError(password, "Password must be at least 6 characters"); valid=f alse; } else { clearError(password); } if (!valid) e.preventDefault(); }); } if (registerForm)
+    { registerForm.addEventListener( "submit", (e)=> { const username = registerForm.querySelector("#username"); const email = registerForm.querySelector("#email"); const password = registerForm.querySelector("#password"); let valid = true; if (username.value.trim() === "") { showError(username, "Username
+    is required"); valid = false; } else { clearError(username); } if (!validateEmail(email.value)) { showError(email, "Invalid email format"); valid = false; } else { clearError(email); } if (password.value.length
+    < 6) { showError(password,
+        "Password must be at least 6 characters"); valid=f alse; } else { clearError(password); } if (!valid) e.preventDefault(); }); } });

@@ -317,3 +317,11 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+.profile-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 10px solid #ddd;
+}

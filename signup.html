@@ -4,50 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOCO Sign Up</title>
+    <title>Signup - MyApp</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        function validateSignup() {
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+            const confirm = document.getElementById("confirm-password").value;
+
+            if (email === "" || password === "" || confirm === "") {
+                alert("All fields are required.");
+                return false;
+            }
+            if (!email.includes("@")) {
+                alert("Invalid email format.");
+                return false;
+            }
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters.");
+                return false;
+            }
+            if (password !== confirm) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
-    <section class="content" style="max-width: 400px; margin: 5rem auto;">
-        <h2 class="section-title">Sign Up</h2>
-        <form id="signup-form">
-            <div class="input-group">
-                <label for="signup-name">Name</label>
-                <input type="text" id="signup-name" placeholder="Enter your name" required>
-            </div>
-            <div class="input-group">
-                <label for="signup-email">Email</label>
-                <input type="email" id="signup-email" placeholder="Enter your email" required>
-            </div>
-            <div class="input-group">
-                <label for="signup-password">Password</label>
-                <input type="password" id="signup-password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="cta-button">Sign Up</button>
-        </form>
-        <p style="text-align:center; margin-top:1rem;">Already have an account? <a href="login.html">Login</a></p>
-    </section>
+    <header class="navbar">
+        <div class="logo">MyApp</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
 
-    <script>
-        const signupForm = document.getElementById('signup-form');
-        signupForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
-            const password = document.getElementById('signup-password').value;
-            if (name && email && password) {
-                const user = {
-                    name,
-                    email,
-                    password
-                };
-                localStorage.setItem('vocoUser', JSON.stringify(user));
-                alert('Signup successful! You can now login.');
-                window.location.href = 'login.html';
-            }
-        });
-    </script>
+    <main class="content container">
+        <section class="card info-box signup-card">
+            <h2>Create Account</h2>
+            <form action="profile.html" method="post" onsubmit="return validateSignup()">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signup-email" name="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-password" name="password" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm" placeholder="Confirm password">
+                </div>
+                <button type="submit" class="cta-button">Sign Up</button>
+            </form>
+        </section>
+    </main>
 </body>
 
 </html>
