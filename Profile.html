@@ -3,46 +3,98 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - MyApp</title>
+    <title>Profile - VOCO</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #4CAF50, #2196F3);
+            /* Gradient background */
+        }
+        
+        .profile-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        
+        .profile-card h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .profile-card p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        
+        .profile-card nav {
+            margin-top: 20px;
+        }
+        
+        .profile-card nav a {
+            color: #2196F3;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        
+        .profile-card nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .logout-btn {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .logout-btn:hover {
+            background: #2196F3;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Header -->
-    <header class="navbar">
-        <div class="logo">MyApp</div>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="logout.html">Logout</a>
-            <a href="login.html">Login</a>
-        </nav>
-    </header>
 
-    <!-- Main Content -->
-    <main class="content container">
-        <section class="card info-box profile-card">
-            <img src="assets/profile1.jpg" alt="Profile Avatar" class="profile-avatar">
-            <div class="profile-info">
-                <h2>John Doe</h2>
-                <p>Email: john.doe@example.com</p>
-                <p>Address: 123 Main St, Anytown, USA</p>
-            </div>
-        </section>
+    <section class="profile-card">
+        <img src="profile1.jpg" alt="Profile Avatar" class="Avatar">
+        <h2>Stephen Rey Jakosalem</h2>
+        <p class="email">stephen.jakosalem@gmail.com</p>
+        <p class="address">Poblacion ondol, loboc, Bohol</p>
+    </section>====
 
-        <section class="card info-box info-section">
-            <h3 class="section-title">About Me</h3>
-            <p>Passionate about tech, coding, and UI/UX design.</p>
+    <script>
+        // Display user info from session
+        window.onload = function() {
+            const name = sessionStorage.getItem("name") || "Guest";
+            const email = sessionStorage.getItem("email") || "N/A";
+            const role = sessionStorage.getItem("role") || "N/A";
+            document.getElementById("profileInfo").innerHTML =
+                `<p><strong>Name:</strong> ${name}</p>
+         <p><strong>Email:</strong> ${email}</p>
+         <p><strong>Role:</strong> ${role}</p>`;
+        };
 
-            <h3 class="section-title">Account Details</h3>
-            <p>Member since Jan 2023, Standard User</p>
-
-            <h3 class="section-title">User Bio</h3>
-            <p>Loves building dashboards and clean interfaces.</p>
-
-            <a href="settings.html" class="cta-button">Go to Settings</a>
-        </section>
-    </main>
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = "index.html"; // back to landing page
+        }
+    </script>
 </body>
 
 </html>

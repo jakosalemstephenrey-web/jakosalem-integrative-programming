@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - VOCO</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #4CAF50, #2196F3);
+            /* Gradient background */
+        }
+        
+        .admin-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        
+        .admin-card h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .admin-card p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        
+        .admin-card nav {
+            margin-top: 20px;
+        }
+        
+        .admin-card nav a {
+            display: inline-block;
+            margin: 8px;
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .admin-card nav a:hover {
+            background: #2196F3;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Access Rule: Only admins can view
+        if (sessionStorage.getItem("role") !== "admin") {
+            alert("Access denied. Admins only.");
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <div class="admin-card">
+        <h2>Admin Dashboard</h2>
+        <p>Welcome Admin</p>
+        <p>Use the menu to manage system data</p>
+        <nav>
+            <a href="manage-data.html">Manage Data</a>
+            <a href="add-user.html">Add User</a>
+            <a href="index.html">Back to VOCO</a>
+        </nav>
+    </div>
+</body>
+
+</html>

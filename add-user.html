@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - VOCO</title>
+    <title>Add User - VOCO</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -17,29 +17,27 @@
             /* Gradient background */
         }
         
-        .login-card {
+        .add-card {
             background: #fff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            width: 320px;
+            width: 350px;
+        }
+        
+        .add-card h2 {
+            margin-bottom: 20px;
+            color: #333;
             text-align: center;
         }
         
-        .login-card h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        .login-card label {
+        .add-card label {
             display: block;
             margin-top: 15px;
-            text-align: left;
             font-weight: bold;
         }
         
-        .login-card input,
-        .login-card select {
+        .add-card input {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -47,7 +45,7 @@
             border-radius: 4px;
         }
         
-        .login-card button {
+        .add-card button {
             margin-top: 20px;
             width: 100%;
             padding: 10px;
@@ -59,56 +57,58 @@
             font-weight: bold;
         }
         
-        .login-card button:hover {
+        .add-card button:hover {
             background: #2196F3;
         }
         
-        .login-card p {
+        #result {
             margin-top: 15px;
+            text-align: center;
             font-size: 14px;
-        }
-        
-        .login-card a {
-            color: #2196F3;
-            text-decoration: none;
-        }
-        
-        .login-card a:hover {
-            text-decoration: underline;
+            color: #333;
         }
     </style>
 </head>
 
 <body>
-    <div class="login-card">
-        <h2>Login</h2>
-        <form onsubmit="login(event)">
-            <label>Email:
-        <input type="email" id="email" required>
+    <script>
+        // Access Rule: Only admins can view
+        if (sessionStorage.getItem("role") !== "admin") {
+            alert("Access denied. Admins only.");
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <div class="add-card">
+        <h2>Add User</h2>
+        <form id="addUserForm" onsubmit="addUser(event)">
+            <label>Name:
+        <input type="text" id="newName" required>
       </label>
-            <label>Password:
-        <input type="password" id="password" required>
+            <label>Email:
+        <input type="email" id="newEmail" required>
       </label>
             <label>Role:
-        <select id="role">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
+        <input type="text" id="newRole" required>
       </label>
-            <button type="submit">Login</button>
+            <button type="submit">Add User</button>
         </form>
-        <p>Don’t have an account? <a href="signup.html">Sign up</a></p>
+        <div id="result"></div>
     </div>
 
     <script>
-        function login(event) {
+        function addUser(event) {
             event.preventDefault();
-            const role = document.getElementById("role").value;
-            sessionStorage.setItem("role", role);
-            if (role === "admin") {
-                window.location.href = "admin.html";
+            const name = document.getElementById("newName").value;
+            const email = document.getElementById("newEmail").value;
+            const role = document.getElementById("newRole").value;
+
+            if (name && email && role) {
+                document.getElementById("result").innerHTML =
+                    `<p>New user added: <strong>${name}</strong> (${email}), Role: ${role}</p>`;
+                document.getElementById("addUserForm").reset();
             } else {
-                window.location.href = "profile.html";
+                alert("Please fill in all fields.");
             }
         }
     </script>

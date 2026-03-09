@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Data - VOCO</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #4CAF50, #2196F3);
+            /* Gradient background */
+        }
+        
+        .manage-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 600px;
+        }
+        
+        .manage-card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background: #4CAF50;
+            color: #fff;
+        }
+        
+        button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        button.delete {
+            background: #f44336;
+            color: #fff;
+        }
+        
+        button.delete:hover {
+            background: #d32f2f;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        form button {
+            margin-top: 15px;
+            width: 100%;
+            background: #4CAF50;
+            color: #fff;
+        }
+        
+        form button:hover {
+            background: #2196F3;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Access Rule: Only admins can view
+        if (sessionStorage.getItem("role") !== "admin") {
+            alert("Access denied. Admins only.");
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <div class="manage-card">
+        <h2>Manage Users</h2>
+        <table id="userTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Ana</td>
+                <td>ana@email.com</td>
+                <td><button class="delete" onclick="deleteUser(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Juan</td>
+                <td>juan@email.com</td>
+                <td><button class="delete" onclick="deleteUser(this)">Delete</button></td>
+            </tr>
+        </table>
+
+        <h3>Add User</h3>
+        <form onsubmit="addUser(event)">
+            <label>Name:
+        <input type="text" id="name" required>
+      </label>
+            <label>Email:
+        <input type="email" id="email" required>
+      </label>
+            <label>Role:
+        <input type="text" id="role" required>
+      </label>
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+
+    <script>
+        function deleteUser(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            alert("User deleted (simulation).");
+        }
+
+        function addUser(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const role = document.getElementById("role").value;
+
+            const table = document.getElementById("userTable");
+            const newRow = table.insertRow(-1);
+
+            const idCell = newRow.insertCell(0);
+            const nameCell = newRow.insertCell(1);
+            const emailCell = newRow.insertCell(2);
+            const actionCell = newRow.insertCell(3);
+
+            idCell.innerHTML = table.rows.length - 1; // auto ID
+            nameCell.innerHTML = name;
+            emailCell.innerHTML = email;
+            actionCell.innerHTML = '<button class="delete" onclick="deleteUser(this)">Delete</button>';
+
+            alert("New user added (simulation).");
+            event.target.reset();
+        }
+    </script>
+</body>
+
+</html>
