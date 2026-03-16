@@ -6,19 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VOCO Landing Page</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Page background */
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1f1f2e, #3a3a60);
+            color: white;
+        }
+        /* Center search section */
+        
+        .content {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        /* Input field */
+        
+        #countryInput {
+            padding: 10px;
+            width: 220px;
+            border-radius: 5px;
+            border: none;
+        }
+        /* Search button */
+        
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #ff7a18;
+            color: white;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #ff9a3c;
+        }
+        /* Results styling */
+        
+        #results {
+            margin-top: 25px;
+        }
+        
+        #results li {
+            list-style: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 10px auto;
+            width: 320px;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">VOCO</div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
+            <li><a href="api.html">University Search</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="login.html" class="cta-nav">Login</a></li>
         </ul>
     </nav>
+
+    <!-- Navigation -->
+
+
 
     <!-- Hero Section -->
     <section class="hero">

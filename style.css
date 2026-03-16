@@ -1,93 +1,122 @@
-                /* General Reset */
-            
-            body {
-                margin: 0;
-                font-family: 'Roboto', Arial, sans-serif;
-                background: #f9f9f9;
-                color: #333;
-            }
-            /* Navbar */
-            
-            .navbar {
-                background: #333;
-                color: #fff;
-                padding: 15px 30px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .navbar .logo {
-                font-weight: bold;
-                font-size: 20px;
-            }
-            
-            .navbar .nav-links {
-                list-style: none;
-                display: flex;
-                gap: 20px;
-            }
-            
-            .navbar .nav-links a {
-                color: #fff;
-                text-decoration: none;
-            }
-            
-            .navbar .nav-links a:hover {
-                color: #4CAF50;
-            }
-            /* Hero Section */
-            
-            .hero {
-                background: linear-gradient(to right, #4CAF50, #2196F3);
-                color: #fff;
-                text-align: center;
-                padding: 100px 20px;
-            }
-            
-            .hero h1 {
-                font-size: 48px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .cta-button {
-                background: #fff;
-                color: #333;
-                padding: 12px 24px;
-                border-radius: 4px;
-                text-decoration: none;
-                font-weight: bold;
-            }
-            
-            .cta-button:hover {
-                background: #4CAF50;
-                color: #fff;
-            }
-            /* Content Sections */
-            
-            section.content {
-                padding: 60px 20px;
-                text-align: center;
-            }
-            
-            .section-title {
-                font-size: 28px;
-                margin-bottom: 20px;
-            }
-            /* Forms */
-            
-            form {
-                max-width: 400px;
-                margin: 0 auto;
-                background: #fff;
-                padding: 20px;
-                border-radius: 6px;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            }
-            
-            form label {
-                display: block;
-                margin
+                            /* General Reset */
+                        
+                        body {
+                            margin: 0;
+                            font-family: 'Roboto', Arial, sans-serif;
+                            background: #f9f9f9;
+                            color: #333;
+                            /* Same background for all pages */
+                            body {
+                                margin: 0;
+                                font-family: Arial, sans-serif;
+                                background: linear-gradient(135deg, #1f1f2e, #3a3a60);
+                                color: white;
+                            }
+                        }
+                        /* Navbar */
+                        
+                        .navbar {
+                            background: #333;
+                            color: #fff;
+                            padding: 15px 30px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        
+                        .navbar .logo {
+                            font-weight: bold;
+                            font-size: 20px;
+                        }
+                        
+                        .navbar .nav-links {
+                            list-style: none;
+                            display: flex;
+                            gap: 20px;
+                        }
+                        
+                        .navbar .nav-links a {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                        
+                        .navbar .nav-links a:hover {
+                            color: #4CAF50;
+                        }
+                        /* Hero Section */
+                        
+                        .hero {
+                            background: linear-gradient(to right, #4CAF50, #2196F3);
+                            color: #fff;
+                            text-align: center;
+                            padding: 100px 20px;
+                        }
+                        
+                        .hero h1 {
+                            font-size: 48px;
+                        }
+                        
+                        .hero p {
+                            font-size: 18px;
+                        }
+                        
+                        .cta-button {
+                            background: #fff;
+                            color: #333;
+                            padding: 12px 24px;
+                            border-radius: 4px;
+                            text-decoration: none;
+                            font-weight: bold;
+                        }
+                        
+                        .cta-button:hover {
+                            background: #4CAF50;
+                            color: #fff;
+                        }
+                        /* Content Sections */
+                        
+                        section.content {
+                            padding: 60px 20px;
+                            text-align: center;
+                        }
+                        
+                        .section-title {
+                            font-size: 28px;
+                            margin-bottom: 20px;
+                        }
+                        /* Forms */
+                        
+                        form {
+                            max-width: 400px;
+                            margin: 0 auto;
+                            background: #fff;
+                            padding: 20px;
+                            border-radius: 6px;
+                            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                        }
+                        
+                        form label {
+                            display: block;
+                            margin input {
+                                padding: 10px;
+                                margin: 10px;
+                                width: 200px;
+                            }
+                            button {
+                                padding: 10px 15px;
+                                background-color: #333;
+                                color: white;
+                                border: none;
+                                cursor: pointer;
+                            }
+                            button:hover {
+                                background-color: #555;
+                            }
+                            #results {
+                                margin-top: 20px;
+                            }
+                            #results li {
+                                background: #f5f5f5;
+                                padding: 10px;
+                                border-radius: 5px;
+                            }
