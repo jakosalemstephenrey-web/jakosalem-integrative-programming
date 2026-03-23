@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Universities | VOCO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1f1f2e, #3a3a60);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        a {
+            color: #ff7a18;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 10px auto;
+            padding: 15px;
+            width: 350px;
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: darkred;
+        }
+        
+        #clearAll {
+            background: orange;
+            margin-top: 15px;
+        }
+        
+        #clearAll:hover {
+            background: darkorange;
+        }
+        
+        p.empty {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Saved Universities</h1>
+    <a href="api.html">← Back to University Search</a>
+
+    <ul id="savedList"></ul>
+    <button id="clearAll">Clear All Saved</button>
+
+    <script>
+        const savedListEl = document.getElementById('savedList');
+        const clearAllBtn = document.getElementById('clearAll');
+
+        // Load saved universities
+        function loadSaved() {
+            const saved = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            savedListEl.innerHTML = '';
+
+            if (saved.length === 0) {
+                savedListEl.innerHTML = '<p class="empty">No saved universities yet.</p>';
+                return;
+            }
+
+            saved.forEach((uni, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<h3>${uni.name}</h3><p>${uni.country}</p>`;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.addEventListener('click', () => removeUniversity(index));
+
+                li.appendChild(removeBtn);
+                savedListEl.appendChild(li);
+            });
+        }
+
+        // Remove a university by index
+        function removeUniversity(index) {
+            let saved = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            const removedName = saved[index].name;
+            saved.splice(index, 1);
+            localStorage.setItem('savedUniversities', JSON.stringify(saved));
+            loadSaved();
+            alert(`${removedName} has been removed from saved universities.`);
+        }
+
+        // Clear all saved universities
+        clearAllBtn.addEventListener('click', () => {
+            if (confirm('Remove all saved universities?')) {
+                localStorage.removeItem('savedUniversities');
+                loadSaved();
+            }
+        });
+
+        // Initialize page
+        window.onload = loadSaved;
+    </script>
+</body>
+
+</html>

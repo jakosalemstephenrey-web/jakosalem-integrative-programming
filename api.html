@@ -4,107 +4,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Search App | VOCO</title>
-    <link rel="stylesheet" href="style.css">
-
+    <title>University Search & Saved | VOCO</title>
     <style>
-        /* Page background */
-        
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #1f1f2e, #3a3a60);
             color: white;
-        }
-        /* Center search section */
-        
-        .content {
             text-align: center;
-            padding: 60px 20px;
+            margin: 0;
+            padding: 20px;
         }
-        /* Input field */
         
-        #countryInput {
-            padding: 10px;
-            width: 220px;
+        h1,
+        h2 {
+            margin-bottom: 20px;
+        }
+        
+        input,
+        button {
+            padding: 8px 12px;
             border-radius: 5px;
             border: none;
+            margin: 5px;
         }
-        /* Search button */
+        
+        input {
+            width: 250px;
+        }
         
         button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
             background: #ff7a18;
             color: white;
             cursor: pointer;
         }
         
         button:hover {
-            background: #ff9a3c;
-        }
-        /* Results styling */
-        
-        #results {
-            margin-top: 25px;
+            background: darkorange;
         }
         
-        #results li {
+        ul {
+            padding: 0;
+        }
+        
+        li {
             list-style: none;
             background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
             margin: 10px auto;
-            width: 320px;
+            padding: 15px;
+            width: 350px;
             border-radius: 8px;
+            text-align: left;
+        }
+        
+        .remove-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .remove-btn:hover {
+            background: darkred;
+        }
+        
+        .visit-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .visit-btn:hover {
+            background: #0f62b1;
+        }
+        
+        #clearAll {
+            background: orange;
+            margin-top: 15px;
+        }
+        
+        #clearAll:hover {
+            background: darkorange;
+        }
+        
+        p.empty {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ccc;
         }
     </style>
-
 </head>
 
 <body>
+    <h1>University Search & Saved</h1>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">VOCO</div>
-        <ul class="nav-links">
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#features">Features</a></li>
-            <li><a href="api.html">University Search</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="login.html" class="cta-nav">Login</a></li>
-        </ul>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="fade-in">University Search</h1>
-            <p class="fade-in delay">Find universities by entering a country name.</p>
-        </div>
-    </section>
-
-    <!-- API Search Section -->
-    <section class="content">
-
-        <h2 class="section-title fade-in">Search Universities</h2>
-
-        <p>Enter a country name to find universities.</p>
-
+    <div>
         <input type="text" id="countryInput" placeholder="Enter country name">
         <button onclick="searchUniversity()">Search</button>
+    </div>
 
-        <div id="results"></div>
+    <h2>Search Results</h2>
+    <div id="results"></div>
 
-    </section>
+    <h2>Saved Universities</h2>
+    <ul id="savedList"></ul>
+    <button id="clearAll">Clear All Saved</button>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 | VOCO Landing Page Project</p>
-    </footer>
+    <script>
+        const resultsDiv = document.getElementById("results");
+        const savedListEl = document.getElementById('savedList');
+        const clearAllBtn = document.getElementById('clearAll');
 
-    <script src="api.js"></script>
+        // Search universities by country
+        async function searchUniversity() {
+            const country = document.getElementById("countryInput").value.trim();
 
+            if (country === "") {
+                resultsDiv.innerHTML = "<p>Please enter a country name.</p>";
+                return;
+            }
+
+            const apiURL = `http://universities.hipolabs.com/search?country=${country}`;
+
+            try {
+                const response = await fetch(apiURL);
+                if (!response.ok) throw new Error("API request failed");
+
+                const data = await response.json();
+
+                if (data.length === 0) {
+                    resultsDiv.innerHTML = "<p>No universities found.</p>";
+                    return;
+                }
+
+                let output = "<ul>";
+                data.slice(0, 10).forEach((uni) => {
+                    output += `
+                        <li>
+                            <strong>${uni.name}</strong><br>
+                            ${uni.country}<br>
+                            Website: <a href="${uni.web_pages[0]}" target="_blank">${uni.web_pages[0]}</a><br>
+                            <button onclick="saveUniversity('${uni.name}', '${uni.country}', '${uni.web_pages[0]}')">Save</button>
+                        </li>
+                    `;
+                });
+                output += "</ul>";
+
+                resultsDiv.innerHTML = output;
+
+            } catch (error) {
+                resultsDiv.innerHTML = "<p>Error retrieving data from the API.</p>";
+                console.error(error);
+            }
+        }
+
+        // Save university to localStorage
+        function saveUniversity(name, country, webpage) {
+            let saved = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+
+            // Prevent duplicates
+            if (saved.some(uni => uni.name === name && uni.country === country)) {
+                alert(`${name} is already saved.`);
+                return;
+            }
+
+            saved.push({
+                name,
+                country,
+                webpage
+            });
+            localStorage.setItem('savedUniversities', JSON.stringify(saved));
+            loadSaved();
+            alert(`${name} has been saved.`);
+        }
+
+        // Load saved universities
+        function loadSaved() {
+            const saved = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            savedListEl.innerHTML = '';
+
+            if (saved.length === 0) {
+                savedListEl.innerHTML = '<p class="empty">No saved universities yet.</p>';
+                return;
+            }
+
+            saved.forEach((uni, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<h3>${uni.name}</h3><p>${uni.country}</p>`;
+
+                // Visit website button
+                const visitBtn = document.createElement('button');
+                visitBtn.textContent = 'Visit Website';
+                visitBtn.classList.add('visit-btn');
+                visitBtn.addEventListener('click', () => {
+                    window.open(uni.webpage || '#', '_blank');
+                });
+
+                // Remove button
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.classList.add('remove-btn');
+                removeBtn.addEventListener('click', () => removeUniversity(index));
+
+                li.appendChild(visitBtn);
+                li.appendChild(removeBtn);
+                savedListEl.appendChild(li);
+            });
+        }
+
+        // Remove a university
+        function removeUniversity(index) {
+            let saved = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            const removedName = saved[index].name;
+            saved.splice(index, 1);
+            localStorage.setItem('savedUniversities', JSON.stringify(saved));
+            loadSaved();
+            alert(`${removedName} has been removed.`);
+        }
+
+        // Clear all saved universities
+        clearAllBtn.addEventListener('click', () => {
+            if (confirm('Remove all saved universities?')) {
+                localStorage.removeItem('savedUniversities');
+                loadSaved();
+            }
+        });
+
+        // Initialize saved list on page load
+        window.onload = loadSaved;
+    </script>
 </body>
 
 </html>
